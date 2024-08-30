@@ -2,7 +2,7 @@ import { addAfter } from "../../packages/dom/dom";
 
 describe("addAfter", () => {
   let a: Element, b: Element, c: Element, d: Element;
-  beforeAll(() => {
+  beforeEach(() => {
     a = document.createElement("a");
     b = document.createElement("b");
     c = document.createElement("c");
@@ -17,6 +17,7 @@ describe("addAfter", () => {
   })
 
   it("should add a node after the target node when the target node has no parent", () => {
+    a.appendChild(c);
     addAfter(c, d);
     expect(c.nextSibling).toBe(d);
   })
@@ -32,7 +33,7 @@ describe("addAfter", () => {
   it("should not add a node after the target node when the target node does not exist", () => {
     b.remove();
     addAfter(b, d);
-    expect(b.nextSibling).toBeNull();
+    expect(b?.nextSibling).toBeNull();
   })
 
   it("should not add a node after the target node when the target node is not a Node", () => {
